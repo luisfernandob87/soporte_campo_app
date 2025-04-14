@@ -1,6 +1,7 @@
 import { Text, View, StyleSheet, Button, FlatList, TouchableOpacity } from 'react-native';
 import { useRouter, useLocalSearchParams } from 'expo-router';
 import { useEffect, useState } from 'react';
+import { API_BASE_URL } from '../config';
 
 
 export default function Casos() {
@@ -11,7 +12,7 @@ export default function Casos() {
   useEffect(() => {
     const fetchCasos = async () => {
       try {
-        const response = await fetch(`http://192.168.1.14:4000/api/v1/casos/caso/${id_usuario}`);
+        const response = await fetch(`${API_BASE_URL}/casos/caso/${id_usuario}`);
         const data = await response.json();
         if (data.status === 'success') {
           setCasos(data.data.caso);
@@ -28,7 +29,7 @@ export default function Casos() {
   useEffect(() => {
     const fetchTiendas = async () => {
       try {
-        const response = await fetch('http://192.168.1.14:4000/api/v1/tiendas');
+        const response = await fetch(`${API_BASE_URL}/tiendas`);
         const data = await response.json();
         if (data.status === 'success') {
           setTiendas(data.data.tiendas);

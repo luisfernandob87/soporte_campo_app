@@ -2,6 +2,7 @@ import { Text, View, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import * as Location from 'expo-location';
 import { useState } from 'react';
+import { API_BASE_URL } from '../config';
 
 export default function Welcome() {
   const { nombre, id_usuario } = useLocalSearchParams();
@@ -21,7 +22,7 @@ export default function Welcome() {
       const location = await Location.getCurrentPositionAsync({});
       const { latitude, longitude } = location.coords;    
 
-      const response = await fetch('http://192.168.1.14:4000/api/v1/users/' + id_usuario, {
+      const response = await fetch(`${API_BASE_URL}/users/${id_usuario}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',

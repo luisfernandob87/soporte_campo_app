@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Text, View, TextInput, TouchableOpacity, Image, StyleSheet, Alert } from 'react-native';
 import { router } from 'expo-router';
+import { API_BASE_URL } from '../config';
 
 export default function Login() {
   const [usuario, setUsuario] = useState('');
@@ -8,7 +9,7 @@ export default function Login() {
 
   const handleLogin = async () => {
     try {
-      const response = await fetch('http://192.168.1.14:4000/api/v1/users/login', {
+      const response = await fetch(`${API_BASE_URL}/users/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

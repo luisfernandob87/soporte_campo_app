@@ -2,6 +2,7 @@ import { Text, View, StyleSheet, TextInput, TouchableOpacity, ScrollView, Activi
 import { useLocalSearchParams } from 'expo-router';
 import { useEffect, useState } from 'react';
 import * as Location from 'expo-location';
+import { API_BASE_URL } from '../config';
 import { useRouter } from 'expo-router';
 
 export default function DetalleCasos() {
@@ -26,7 +27,7 @@ export default function DetalleCasos() {
   useEffect(() => {
     const fetchDetalleCaso = async () => {
       try {
-        const response = await fetch(`http://192.168.1.14:4000/api/v1/casos/${id_caso}`);
+        const response = await fetch(`${API_BASE_URL}/casos/${id_caso}`);
         const data = await response.json();
         if (data.status === 'success') {
           setDetalle(data.data);
@@ -61,7 +62,7 @@ fetchDetalleCaso();
       const location = await Location.getCurrentPositionAsync({});
       const { latitude, longitude } = location.coords;    
   
-      const response = await fetch('http://192.168.1.14:4000/api/v1/users/' + id_usuario, {
+      const response = await fetch(`${API_BASE_URL}/users/${id_usuario}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -85,7 +86,7 @@ fetchDetalleCaso();
   const cambiarEstado = async (nuevoEstado, nuevaEtapa) => {
     try {
       await updateLocation();
-      const response = await fetch(`http://192.168.1.14:4000/api/v1/casos/${id_caso}`, {
+      const response = await fetch(`${API_BASE_URL}/casos/${id_caso}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -110,7 +111,7 @@ fetchDetalleCaso();
   const guardarResolucion = async () => {
     try {
       await updateLocation();
-      const response = await fetch(`http://192.168.1.14:4000/api/v1/casos/${id_caso}`, {
+      const response = await fetch(`${API_BASE_URL}/casos/${id_caso}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
