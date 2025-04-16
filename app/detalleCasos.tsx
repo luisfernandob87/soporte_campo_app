@@ -234,6 +234,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     paddingTop: 30,
+    maxWidth: 600,
+    width: '100%',
+    marginLeft: 'auto',
+    marginRight: 'auto',
   },
   header: {
     flexDirection: 'row',
@@ -254,7 +258,8 @@ const styles = StyleSheet.create({
   headerTitle: {
     fontSize: 20,
     fontWeight: 'bold',
-    marginLeft: '20%',
+    textAlign: 'right',
+    flex: 1,
   },
   infoContainer: {
     padding: 10,
@@ -263,6 +268,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     marginBottom: 5,
+    
   },
   infoDetail: {
     fontSize: 14,

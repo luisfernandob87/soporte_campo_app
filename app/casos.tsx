@@ -77,6 +77,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     paddingTop: 30,
+    maxWidth: 600,
+    width: '100%',
+    marginLeft: 'auto',
+    marginRight: 'auto',
 
   },
   header: {
@@ -96,10 +100,9 @@ const styles = StyleSheet.create({
   headerTitle: {
     fontSize: 20,
     fontWeight: 'bold',
-    // marginLeft: 10,
-    marginLeft: '20%',
-
-  },
+    textAlign: 'right',
+    flex: 1,
+   },
   itemContainer: {
     padding: 10,
     borderBottomWidth: 1,

@@ -1,14 +1,16 @@
 import { useState } from 'react';
-import { Text, View, TextInput, TouchableOpacity, Image, StyleSheet, Alert } from 'react-native';
+import { Text, View, TextInput, TouchableOpacity, Image, StyleSheet, Alert, ActivityIndicator } from 'react-native';
 import { router } from 'expo-router';
 import { API_BASE_URL } from '../config';
 
 export default function Login() {
   const [usuario, setUsuario] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handleLogin = async () => {
     try {
+      setLoading(true);
       const response = await fetch(`${API_BASE_URL}/users/login`, {
         method: 'POST',
         headers: {
@@ -29,6 +31,8 @@ export default function Login() {
       }
     } catch (error) {
       Alert.alert('Error', 'Error al conectar con el servidor');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -54,8 +58,12 @@ export default function Login() {
         onChangeText={setPassword}
         secureTextEntry
       />
-      <TouchableOpacity style={styles.button} onPress={handleLogin}>
-        <Text style={styles.buttonText}>Iniciar Sesión</Text>
+      <TouchableOpacity style={styles.button} onPress={handleLogin} disabled={loading}>
+        {loading ? (
+          <ActivityIndicator color="#fff" />
+        ) : (
+          <Text style={styles.buttonText}>Iniciar Sesión</Text>
+        )}
       </TouchableOpacity>
     </View>
   );
@@ -74,7 +82,8 @@ const styles = StyleSheet.create({
     height: 150,
   },
   input: {
-    width: '100%',
+    maxWidth: 400,
+    width: '90%',
     height: 50,
     borderWidth: 1,
     borderColor: '#ddd',
@@ -84,7 +93,8 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   button: {
-    width: '100%',
+    maxWidth: 400,
+    width: '90%',
     height: 50,
     backgroundColor: '#007AFF',
     borderRadius: 8,
